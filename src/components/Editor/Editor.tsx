@@ -10,11 +10,10 @@ import StarterKit from '@tiptap/starter-kit'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import Placeholder from '@tiptap/extension-placeholder'
 import Document from '@tiptap/extension-document'
-import { FloatingMenu } from '@tiptap/extension-floating-menu'
 
 import { CustomBubbleMenu } from './BubbleMenu/BubbleMenu'
 import CustomFloatingMenu from './FloatingMenu/FloatingMenu'
-import { useState } from 'react'
+import { Dispatch } from 'react'
 
 lowlight.registerLanguage('html', html)
 lowlight.registerLanguage('css', css)
@@ -27,7 +26,11 @@ const CustomDocument = Document.extend({
     content: 'heading block*',
 })
 
-export default function Editor() {
+interface iProps {
+    setText: Dispatch<React.SetStateAction<any>>
+}
+
+export default function Editor({ setText }: iProps) {
 
     const editor = useEditor({
         extensions: [
@@ -50,9 +53,15 @@ export default function Editor() {
         editorProps: {
             attributes: {
                 class: 'outline-none'
-            }
+            },
         },
-        // content: '<h1>Title</h1> <p>Content</p>'
+        onUpdate: ({ editor }) => {
+            const JSON = editor.getJSON()
+            if (JSON.content) {
+                setText(JSON)
+            }
+            return
+        }
     })
 
     return (

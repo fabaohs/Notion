@@ -4,15 +4,15 @@ interface iProps {
     editor: Editor
 }
 
-const styles = {
-    button: 'hover:bg-zinc-200 text-lg flex p-5 items-center w-[100%] gap-5 text-left',
-    buttonTitle: 'not-prose text-xl text-zinc-900 font-bold',
-    descContainer: 'max-w-[300px]'
-}
-
 export default function CustomFloatingMenu({ editor }: iProps) {
 
     const imageWidth = '50px'
+
+    const styles = {
+        button: 'hover:bg-zinc-200 text-lg flex p-5 items-center w-[100%] gap-5 text-left',
+        buttonTitle: 'not-prose text-xl text-zinc-900 font-bold',
+        descContainer: 'max-w-[300px]'
+    }
 
     return (
 
